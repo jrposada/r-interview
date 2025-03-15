@@ -13,12 +13,12 @@ export default defineConfig(({ mode }) => {
   return defineConfig({
     base: `/${env.VITE_BASE_PATH}`,
     server: {
-      host: 'local.server.com',
+      host: 'localhost',
       port: parseInt(env.VITE_PORT),
-      allowedHosts: ['local.server.com'],
+      allowedHosts: ['localhost'],
       proxy: {
         '/api': {
-          target: `http://local.server.com:3100/development`,
+          target: `http://localhost:3100`,
           changeOrigin: true,
           secure: false,
         },
