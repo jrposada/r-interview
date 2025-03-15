@@ -21,7 +21,7 @@ export default function useSnackbar() {
     (options) => {
       return enqueueSnackbar({
         ...options,
-        autoHideDuration: 2000,
+        autoHideDuration: 5000,
         anchorOrigin: { horizontal: 'right', vertical: 'bottom' },
       });
     },
