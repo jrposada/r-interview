@@ -1,0 +1,46 @@
+{
+  "name": "@jrposada/r-interview-backend",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "author": {
+    "email": "jrposada.dev@gmail.com",
+    "name": "Javier Rodriguez Posada"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jrposada/r-interview.git"
+  },
+  "engines": {
+    "node": "^20",
+    "npm": "^10"
+  },
+  "scripts": {
+    "dev": "nodemon -w src -x tsx src/main.ts",
+    "format": "prettier . --write",
+    "lint:eslint": "eslint .",
+    "lint:format": "prettier . --check",
+    "lint:prettier": "prettier . --check",
+    "lint:types": "tsc --noEmit",
+    "lint": "run-p lint:*",
+    "start": "NODE_ENV=production tsx src/main.ts"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "express": "^4.21.2",
+    "moment": "^2.30.1",
+    "multer": "^1.4.5-lts.1",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^4.6.3",
+    "tsx": "^4.19.3"
+  },
+  "devDependencies": {
+    "@types/cookie-parser": "^1.4.8",
+    "@types/express": "^5.0.0",
+    "@types/multer": "^1.4.12",
+    "@types/node": "^20.11.6",
+    "@types/swagger-jsdoc": "^6.0.4",
+    "@types/swagger-ui-express": "^4.1.6",
+    "nodemon": "^3.1.9"
+  }
+}
