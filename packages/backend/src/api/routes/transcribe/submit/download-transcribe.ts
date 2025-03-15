@@ -13,20 +13,20 @@ async function handler(_query: undefined, _data: undefined) {
   const service = new TranscribeService();
   // await service.initialize();
 
-  const report = await service.generate();
+  const report = await service.download();
 
   return { status: 200, data: report };
 }
 
-export function generateTranscribe(router: Router) {
+export function downloadTranscribe(router: Router) {
   /**
    * @swagger
-   * /transcribe/generate:
+   * /transcribe/download:
    *  post:
    *      description: Transcribe an audio file to `.txt`.
    *      responses:
    *          200:
    *              description: `.txt` binary
    */
-  router.post('/transcribe/generate', apiHandler(handler, validate));
+  router.post('/transcribe/download', apiHandler(handler, validate));
 }

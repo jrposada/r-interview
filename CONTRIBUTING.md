@@ -15,9 +15,9 @@ _This guide assumes you are using a Linux system like WSL or Ubuntu._
 
 4. _(Once)_ Setup .env files
 
-`packages/backend/.env.development`
+`packages/backend/.env`
 ```
-REV_API_KEY=<your-api-key>
+REV_AI_ACCESS_TOKEN=<your-api-key>
 ```
 
 5.  Execute code locally `npm run dev`
