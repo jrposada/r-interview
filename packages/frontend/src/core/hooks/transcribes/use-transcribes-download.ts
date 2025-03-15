@@ -2,14 +2,15 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import useSnackbar from '../../../ui/snackbar/use-snackbar';
 import { t } from 'i18next';
+import { ApiResponse } from '@shared/models/api-response';
 
 type UseTranscribesDownloadParams = {
   onError?: (message: string) => void;
-  onSuccess?: () => void;
+  onSuccess?: (data: string) => void;
 };
 
 type UseTranscribesDownloadMutationParams = {
-  jobId: string;
+  id: string;
 };
 
 export function useTranscribesDownload({
@@ -19,19 +20,18 @@ export function useTranscribesDownload({
   const { enqueueAutoHideSnackbar } = useSnackbar();
   const client = useQueryClient();
 
-  // TODO: Response types
   return useMutation<
-    void,
+    string,
     string,
     UseTranscribesDownloadMutationParams,
     unknown
   >({
-    mutationFn: async ({ jobId }) => {
-      const response = await axios.post(
-        `${import.meta.env.VITE_API_BASE_URL}/transcribes/download/${jobId}`
+    mutationFn: async ({ id }) => {
+      const response = await axios.post<ApiResponse<string>>(
+        `${import.meta.env.VITE_API_BASE_URL}/transcribes/download/${id}`
       );
 
-      return response.data;
+      return response.data.data;
     },
     onError: (message) => {
       enqueueAutoHideSnackbar({
@@ -40,12 +40,12 @@ export function useTranscribesDownload({
       });
       onError?.(message);
     },
-    onSuccess: () => {
+    onSuccess: (data) => {
       client.invalidateQueries({
         queryKey: ['transcribes'],
       });
 
-      onSuccess?.();
+      onSuccess?.(data);
     },
   });
 }

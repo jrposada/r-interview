@@ -1,5 +1,5 @@
+import { CloudUpload, Download } from '@mui/icons-material';
 import { Box, Button, Container, Typography } from '@mui/material';
-import { CloudUpload } from '@mui/icons-material';
 import { createFileRoute } from '@tanstack/react-router';
 import { t } from 'i18next';
 import {
@@ -8,15 +8,23 @@ import {
   useCallback,
   useState,
 } from 'react';
+import { useTranscribesDownload } from '../core/hooks/transcribes/use-transcribes-download';
 import { useTranscribesSubmit } from '../core/hooks/transcribes/use-transcribes-submit';
+import { saveAs } from '../core/utils/file-saver';
 
 const Index: FunctionComponent = () => {
   const [file, setFile] = useState<File | undefined>();
   const {
     data: transcribeJob,
     mutate: sendTranscribesSubmit,
-    isPending: isLoadingTranscribesSubmit,
+    status: transcribesSubmitStatus,
   } = useTranscribesSubmit();
+  const { mutate: sendTranscribesDownload, status: transcribesDownloadStatus } =
+    useTranscribesDownload({
+      onSuccess: (data) => {
+        saveAs(data, 'transcript.txt');
+      },
+    });
 
   const handleFileChange = useCallback<ChangeEventHandler<HTMLInputElement>>(
     (event) => {
@@ -37,6 +45,15 @@ const Index: FunctionComponent = () => {
     },
     []
   );
+
+  const handleDownloadTranscript = useCallback(() => {
+    if (!transcribeJob) {
+      return;
+    }
+
+    sendTranscribesDownload({ id: transcribeJob.id });
+  }, [transcribeJob]);
+
   return (
     <Container>
       <Box
@@ -54,9 +71,21 @@ const Index: FunctionComponent = () => {
         variant="contained"
         tabIndex={-1}
         startIcon={<CloudUpload />}
-        loading={isLoadingTranscribesSubmit}
+        loading={transcribesSubmitStatus === 'pending'}
       >
-        {t('Select File')}
+        {t('upload')}
+        <input type="file" hidden onChange={handleFileChange} />
+      </Button>
+
+      <Button
+        variant="contained"
+        tabIndex={-1}
+        startIcon={<Download />}
+        onClick={handleDownloadTranscript}
+        disabled={!transcribeJob}
+        loading={transcribesDownloadStatus === 'pending'}
+      >
+        {t('download')}
         <input type="file" hidden onChange={handleFileChange} />
       </Button>
 
