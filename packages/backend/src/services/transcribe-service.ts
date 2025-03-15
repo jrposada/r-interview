@@ -16,6 +16,8 @@ export class TranscribeService {
       file.buffer,
       file.filename
     );
+
+    console.log(job);
     return job;
   }
 }

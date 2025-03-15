@@ -32,10 +32,10 @@ async function handler(_query: undefined, data: Express.Multer.File) {
   return { status: 200, data: job };
 }
 
-export function submitTranscribe(router: Router) {
+export function submitTranscribes(router: Router) {
   /**
    * @swagger
-   * /transcribe/submit:
+   * /transcribes/submit:
    *  post:
    *      description: Transcribe an audio file to `.txt`.
    *      responses:
@@ -43,7 +43,7 @@ export function submitTranscribe(router: Router) {
    *              description:
    */
   router.post(
-    '/transcribe/submit',
+    '/transcribes/submit',
     upload.single('file'),
     apiHandler(handler, validate)
   );

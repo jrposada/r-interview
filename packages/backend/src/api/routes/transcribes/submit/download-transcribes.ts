@@ -18,15 +18,15 @@ async function handler(_query: undefined, _data: undefined) {
   return { status: 200, data: report };
 }
 
-export function downloadTranscribe(router: Router) {
+export function downloadTranscribes(router: Router) {
   /**
    * @swagger
-   * /transcribe/download:
+   * /transcribes/download:
    *  post:
    *      description: Transcribe an audio file to `.txt`.
    *      responses:
    *          200:
    *              description: `.txt` binary
    */
-  router.post('/transcribe/download', apiHandler(handler, validate));
+  router.post('/transcribes/download', apiHandler(handler, validate));
 }

@@ -1,10 +1,10 @@
 import { Router } from 'express';
-import { downloadTranscribe } from './transcribe/submit/download-transcribe.ts';
-import { submitTranscribe } from './transcribe/submit/submit-transcribe.ts';
+import { downloadTranscribes } from './transcribes/submit/download-transcribes.ts';
+import { submitTranscribes } from './transcribes/submit/submit-transcribes.ts';
 
 const router = Router();
 
-downloadTranscribe(router);
-submitTranscribe(router);
+downloadTranscribes(router);
+submitTranscribes(router);
 
 export { router };

@@ -1,3 +1,12 @@
 {
-  "translation": {}
+  "translation": {
+    "title": "Transcribe your audio files to text",
+    "upload": "Upload File",
+    "transcribes": {
+      "submit": {
+        "error": "Could not upload your file.",
+        "success": "File upload successfully"
+      }
+    }
+  }
 }
