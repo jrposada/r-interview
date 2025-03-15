@@ -23,9 +23,7 @@ async function handler(
 ) {
   assert(request.io, 'Expected IO to be defined.');
 
-  console.log('data', data);
   request.io.emit('transcription-complete', data);
-  console.log('event emitted');
 
   return { status: 200, data: undefined };
 }

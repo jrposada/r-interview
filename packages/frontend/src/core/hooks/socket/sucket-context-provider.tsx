@@ -9,13 +9,13 @@ const SocketProvider: FunctionComponent<PropsWithChildren> = ({ children }) => {
     const eventName = 'ready';
 
     socket.on(eventName, () => {
-      console.log(' ready');
+      console.log('ready');
     });
 
     return () => {
       socket.off(eventName);
     };
-  });
+  }, []);
 
   return (
     <SocketContext.Provider value={socket}>{children}</SocketContext.Provider>
