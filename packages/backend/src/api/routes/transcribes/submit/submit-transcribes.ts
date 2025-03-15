@@ -11,8 +11,9 @@ const upload = multer();
 
 function validate(
   _query: Request['query'],
-  data: Express.Multer.File
-): { query: undefined; data: Express.Multer.File } {
+  data: Express.Multer.File,
+  params: Request['params']
+): { query: undefined; data: Express.Multer.File; params: Request['params'] } {
   if (!data) {
     throw new ApiError(400, 'No file uploaded');
   }
@@ -21,10 +22,14 @@ function validate(
     throw new ApiError(400, `Invalid file format ${data.mimetype}`);
   }
 
-  return { data, query: undefined };
+  return { data, query: undefined, params };
 }
 
-async function handler(_query: undefined, data: Express.Multer.File) {
+async function handler(
+  _query: undefined,
+  data: Express.Multer.File,
+  _params: Request['params']
+) {
   const service = new TranscribeService();
 
   const job = await service.submit(data);

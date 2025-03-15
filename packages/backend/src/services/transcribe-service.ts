@@ -10,7 +10,10 @@ export class TranscribeService {
       token: process.env.REV_AI_ACCESS_TOKEN,
     });
   }
-  async download(): Promise<undefined> {}
+  async download(jobId: string): Promise<string> {
+    const summary = await this.#revAiClient.getTranscriptText(jobId);
+    return summary;
+  }
   async submit(file: Express.Multer.File): Promise<RevAiApiJob> {
     const job = await this.#revAiClient.submitJobAudioData(
       file.buffer,

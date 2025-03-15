@@ -3,6 +3,9 @@
     "title": "Transcribe your audio files to text",
     "upload": "Upload File",
     "transcribes": {
+      "download": {
+        "error": "Could not download your transcript."
+      },
       "submit": {
         "error": "Could not upload your file.",
         "success": "File upload successfully"
