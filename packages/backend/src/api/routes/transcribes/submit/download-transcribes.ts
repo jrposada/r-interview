@@ -15,6 +15,7 @@ function validate(
 }
 
 async function handler(
+  _request: Request,
   _query: undefined,
   _data: undefined,
   params: DownloadTranscribesParams

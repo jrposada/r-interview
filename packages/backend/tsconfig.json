@@ -18,7 +18,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "esModuleInterop": true,
-    "noImplicitReturns": true,
+    "noImplicitReturns": true
   },
-  "include": ["src", "../shared/models", "../shared/utils"],
+  "include": ["src", "../shared/models", "../shared/utils", "types"]
 }

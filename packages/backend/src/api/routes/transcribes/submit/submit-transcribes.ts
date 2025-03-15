@@ -26,6 +26,7 @@ function validate(
 }
 
 async function handler(
+  _request: Request,
   _query: undefined,
   data: Express.Multer.File,
   _params: Request['params']

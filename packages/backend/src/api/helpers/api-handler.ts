@@ -11,6 +11,7 @@ export function apiHandler<
   TResponseData,
 >(
   handler: (
+    request: Request,
     // TODO: use object instead of args
     query: TQuery,
     data: TData,
@@ -32,7 +33,7 @@ export function apiHandler<
         request.file ?? request.body,
         request.params as TParams
       );
-      const result = await handler(query, data, params);
+      const result = await handler(request, query, data, params);
       sendSuccess(origin, response, result);
     } catch (error) {
       console.log(error);

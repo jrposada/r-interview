@@ -6,19 +6,23 @@ import {
   ChangeEventHandler,
   FunctionComponent,
   useCallback,
+  useEffect,
   useState,
 } from 'react';
 import { useTranscribesDownload } from '../core/hooks/transcribes/use-transcribes-download';
 import { useTranscribesSubmit } from '../core/hooks/transcribes/use-transcribes-submit';
 import { saveAs } from '../core/utils/file-saver';
+import { useSocket } from '../core/hooks/socket/use-socket';
 
 const Index: FunctionComponent = () => {
   const [file, setFile] = useState<File | undefined>();
-  const {
-    data: transcribeJob,
-    mutate: sendTranscribesSubmit,
-    status: transcribesSubmitStatus,
-  } = useTranscribesSubmit();
+  const [transcribeJob, setTranscribeJob] = useState<
+    { id: string } | undefined
+  >(undefined);
+  const socket = useSocket();
+
+  const { mutate: sendTranscribesSubmit, status: transcribesSubmitStatus } =
+    useTranscribesSubmit();
   const { mutate: sendTranscribesDownload, status: transcribesDownloadStatus } =
     useTranscribesDownload({
       onSuccess: (data) => {
@@ -53,6 +57,21 @@ const Index: FunctionComponent = () => {
 
     sendTranscribesDownload({ id: transcribeJob.id });
   }, [transcribeJob]);
+
+  // Transcription complete event.
+  useEffect(() => {
+    const eventName = 'transcription-complete';
+
+    console.log('registered');
+    socket.on(eventName, (job: { id: string }) => {
+      console.log(eventName, job);
+      setTranscribeJob({ id: job.id });
+    });
+
+    return () => {
+      socket.off(eventName);
+    };
+  }, [socket]);
 
   return (
     <Container>

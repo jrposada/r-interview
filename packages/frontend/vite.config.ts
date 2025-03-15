@@ -15,10 +15,15 @@ export default defineConfig(({ mode }) => {
     server: {
       host: 'localhost',
       port: parseInt(env.VITE_PORT),
-      allowedHosts: ['localhost'],
+      allowedHosts: ['http://localhost:3100', 'localhost'],
       proxy: {
         '/api': {
           target: `http://localhost:3100`,
+          changeOrigin: true,
+          secure: false,
+        },
+        'socket.io': {
+          target: `http://localhost:3100/socket.io`,
           changeOrigin: true,
           secure: false,
         },

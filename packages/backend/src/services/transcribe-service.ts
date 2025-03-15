@@ -17,10 +17,13 @@ export class TranscribeService {
   async submit(file: Express.Multer.File): Promise<RevAiApiJob> {
     const job = await this.#revAiClient.submitJobAudioData(
       file.buffer,
-      file.filename
+      file.filename,
+      {
+        // TODO: set urls
+        callback_url: `http://localhost:${process.env.API_PORT}${process.env.BASE_PATH}/transcribes/webhook/complete`,
+      }
     );
 
-    console.log(job);
     return job;
   }
 }

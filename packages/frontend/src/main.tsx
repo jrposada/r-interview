@@ -16,6 +16,7 @@ import InfoSnackbar from './ui/snackbar/info-snackbar';
 import Snackbar from './ui/snackbar/snackbar';
 import SuccessSnackbar from './ui/snackbar/success-snackbar';
 import WarningSnackbar from './ui/snackbar/warning-snackbar';
+import SocketProvider from './core/hooks/socket/sucket-context-provider';
 
 const defaultTheme = createTheme();
 const queryClient = new QueryClient();
@@ -24,23 +25,25 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools />
-      <ThemeProvider theme={defaultTheme}>
-        <CssBaseline />
-        <SnackbarProvider
-          maxSnack={3}
-          Components={{
-            default: Snackbar,
-            error: ErrorSnackbar,
-            info: InfoSnackbar,
-            success: SuccessSnackbar,
-            warning: WarningSnackbar,
-          }}
-        >
-          <ModalsProvider>
-            <App />
-          </ModalsProvider>
-        </SnackbarProvider>
-      </ThemeProvider>
+      <SocketProvider>
+        <ThemeProvider theme={defaultTheme}>
+          <CssBaseline />
+          <SnackbarProvider
+            maxSnack={3}
+            Components={{
+              default: Snackbar,
+              error: ErrorSnackbar,
+              info: InfoSnackbar,
+              success: SuccessSnackbar,
+              warning: WarningSnackbar,
+            }}
+          >
+            <ModalsProvider>
+              <App />
+            </ModalsProvider>
+          </SnackbarProvider>
+        </ThemeProvider>
+      </SocketProvider>
     </QueryClientProvider>
   </StrictMode>
 );
