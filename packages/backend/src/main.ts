@@ -13,12 +13,7 @@ dotenv.config();
 const basePath = process.env.BASE_PATH ? `/${process.env.BASE_PATH}` : '';
 const app = express();
 const server = createServer(app);
-const io = new Server(server, {
-  cors: {
-    origin: 'http://localhost:3000',
-    methods: ['GET', 'POST'],
-  },
-});
+const io = new Server(server);
 
 const port = process.env.API_PORT || 3000;
 
@@ -50,7 +45,9 @@ app.use(`${basePath}/api`, router);
 app.use(`${basePath}/swagger`, serve, setup(swaggerSpecs));
 
 io.on('connection', (socket) => {
-  console.log('user connected', socket);
+  console.log('New user connected', socket.id);
+
+  socket.emit('ready');
 });
 
 server.listen(port, () => {
