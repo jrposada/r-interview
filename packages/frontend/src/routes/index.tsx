@@ -61,9 +61,8 @@ const Index: FunctionComponent = () => {
   // Transcription complete event.
   useEffect(() => {
     const eventName = 'transcription-complete';
-    console.log('index', socket.id);
+
     socket.on(eventName, (job: { id: string }) => {
-      console.log(eventName, job);
       setTranscribeJob({ id: job.id });
     });
 

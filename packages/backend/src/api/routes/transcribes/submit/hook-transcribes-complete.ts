@@ -5,9 +5,9 @@ import { apiHandler } from '../../../helpers/api-handler.ts';
 
 function validate(
   _query: Request['query'],
-  data: unknown,
+  data: { job: unknown },
   params: Request['params']
-): { query: undefined; data: unknown; params: Request['params'] } {
+): { query: undefined; data: { job: unknown }; params: Request['params'] } {
   if (!data) {
     throw new ApiError(400, 'No data');
   }
@@ -18,14 +18,15 @@ function validate(
 async function handler(
   request: Request,
   _query: undefined,
-  data: unknown,
+  data: { job: unknown },
   _params: Request['params']
 ) {
   assert(request.io, 'Expected IO to be defined.');
 
-  request.io.emit('transcription-complete', data);
+  console.log(data);
+  request.io.emit('transcription-complete', data.job);
 
-  return { status: 200, data: undefined };
+  return { status: 200, data };
 }
 
 export function hookTranscribesComplete(router: Router) {

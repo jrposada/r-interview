@@ -19,8 +19,8 @@ export class TranscribeService {
       file.buffer,
       file.filename,
       {
-        // TODO: set urls
-        callback_url: `http://localhost:${process.env.API_PORT}${process.env.BASE_PATH}/transcribes/webhook/complete`,
+        // TODO: set urls in envs
+        callback_url: `https://d3d5-170-253-8-113.ngrok-free.app/api/transcribes/webhook/complete`,
       }
     );
 

@@ -15,7 +15,11 @@ export default defineConfig(({ mode }) => {
     server: {
       host: 'localhost',
       port: parseInt(env.VITE_PORT),
-      allowedHosts: ['http://localhost:3100', 'localhost'],
+      allowedHosts: [
+        'http://localhost:3100',
+        'localhost',
+        'd3d5-170-253-8-113.ngrok-free.app',
+      ],
       proxy: {
         '/api': {
           target: `http://localhost:3100`,
