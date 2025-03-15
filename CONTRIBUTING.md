@@ -7,7 +7,7 @@ _This guide assumes you are using a Linux system like WSL or Ubuntu._
 
 ## Getting started
 
-1.  Clone repository through ssh `git@github.com:jrposada/fit-log.git`
+1.  Clone repository through ssh `git@github.com:jrposada/r-interview.git`
 
 2.  Install dependencies `npm i`
 

@@ -1,5 +1,5 @@
 {
-  "name": "@jrposada/fit-log-shared",
+  "name": "@jrposada/r-interview-shared",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jrposada/fit-log.git"
+    "url": "git+https://github.com/jrposada/r-interview.git"
   },
   "engines": {
     "node": "^20",
